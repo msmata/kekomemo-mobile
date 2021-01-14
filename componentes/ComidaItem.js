@@ -1,5 +1,6 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, Text, StyleSheet, Image, Button} from 'react-native';
+import { Entypo } from '@expo/vector-icons';
 
 const ComidaItem = props => {
 
@@ -13,7 +14,10 @@ const ComidaItem = props => {
 
     return (
         <View style={styles.contenedorComida}>
-            <Text>{props.nombre}</Text>
+            <View style={styles.cabecera}>
+                <Text>{props.nombre}</Text>
+                <Entypo name="trash" size={32} color="red" onPress={props.borrarComida} />
+            </View>
             {Imagen}
         </View>
     );
@@ -27,11 +31,17 @@ const styles = StyleSheet.create({
     },
     contenedorComida: {
         flex: 1,
-        alignItems: 'flex-start',
         borderColor: 'black',
         borderWidth: 1,
         backgroundColor: '#ccc',
         marginVertical: 10
+    },
+    cabecera: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginVertical: 5,
+        alignItems: 'center'
     }
 });
 

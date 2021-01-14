@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {View, Text, StyleSheet, FlatList } from 'react-native';
+import {View, Text, StyleSheet, FlatList, Alert } from 'react-native';
 import { AntDesign } from '@expo/vector-icons'
 import { COMIDAS } from '../data/dummy';
 import ComidaItem from '../componentes/ComidaItem';
@@ -12,8 +12,31 @@ const Comidas = props => {
 
     const renderComida = itemData => {
         return (
-            <ComidaItem nombre={itemData.item.nombre} imagen={itemData.item.imagen} />
+            <ComidaItem nombre={itemData.item.nombre} imagen={itemData.item.imagen} borrarComida={() => mostrarAlertaBorrado(itemData.item.id)} />
         );
+    }
+
+    const mostrarAlertaBorrado = id => {
+        const comidaSeleccionada = listadoComidas.find(comida => comida.id === id);
+
+        Alert.alert(
+            "Cuidado!",
+            "¿Confirmás que querés borrar " + comidaSeleccionada.nombre + "?",
+            [
+              {
+                text: "Cancelar",
+                onPress: () => {},
+                style: "cancel"
+              },
+              { text: "OK", onPress: () => borrarComida(id) }
+            ],
+            { cancelable: false }
+        );
+    }
+
+    const borrarComida = id => {
+        const listaComidasNueva = listadoComidas.filter(comida => comida.id !== id);
+        setListadoComidas(listaComidasNueva);
     }
 
     const addComida = (valor) => {
@@ -31,7 +54,7 @@ const Comidas = props => {
         <View style={styles.listaComidas}>
             <Text style={styles.titulo}>Lista de comidas</Text>
             <FlatList 
-                data={COMIDAS}
+                data={listadoComidas}
                 renderItem={renderComida}
                 keyExtractor={(item, index) => index.toString()}
             />
