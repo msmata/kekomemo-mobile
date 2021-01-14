@@ -61,7 +61,8 @@ const styles = StyleSheet.create({
     botonera: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginHorizontal: 10
+        marginHorizontal: 10,
+        marginVertical: 10
     }
 });
 

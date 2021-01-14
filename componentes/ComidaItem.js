@@ -15,7 +15,7 @@ const ComidaItem = props => {
     return (
         <View style={styles.contenedorComida}>
             <View style={styles.cabecera}>
-                <Text>{props.nombre}</Text>
+                <Text style={styles.nombre}>{props.nombre}</Text>
                 <Entypo name="trash" size={32} color="red" onPress={props.borrarComida} />
             </View>
             {Imagen}
@@ -28,6 +28,9 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
         height: 350
+    },
+    nombre:{
+        marginLeft: 10
     },
     contenedorComida: {
         flex: 1,
