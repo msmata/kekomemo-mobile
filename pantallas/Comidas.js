@@ -16,6 +16,17 @@ const Comidas = props => {
         );
     }
 
+    const addComida = (valor) => {
+        const listaComidasNueva = listadoComidas;
+        listaComidasNueva.push({
+            id: listaComidasNueva.length + 1,
+            nombre: valor,
+            imagen: 'sin-imagen'
+        });
+        setListadoComidas(listaComidasNueva);
+        setAgregarNuevaComida(false);
+    }
+
     return (
         <View style={styles.listaComidas}>
             <Text style={styles.titulo}>Lista de comidas</Text>
@@ -32,17 +43,7 @@ const Comidas = props => {
             <ModalAgregarComida 
                 visible={agregarNuevaComida}
                 onCancelar={() => setAgregarNuevaComida(false)}
-                onAceptar={(valor) => {
-                    const listaComidasNueva = listadoComidas;
-                    listaComidasNueva.push({
-                        id: listaComidasNueva.length + 1,
-                        nombre: valor,
-                        imagen: 'sin-imagen.jpg'
-                    });
-                    setListadoComidas(listaComidasNueva);
-                    setAgregarNuevaComida(false);
-                }}
-                listadoComidas={listadoComidas}
+                onAceptar={addComida}
             />
         </View>
     );

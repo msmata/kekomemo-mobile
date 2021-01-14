@@ -3,10 +3,18 @@ import {View, Text, StyleSheet, Image} from 'react-native';
 
 const ComidaItem = props => {
 
+    let Imagen;
+
+    if (props.imagen === 'sin-imagen') {
+        Imagen = <Image style={styles.imagen} source={require('../assets/comidas.jpeg')} />
+    } else {
+        Imagen = <Image style={styles.imagen} source={{uri: props.imagen}} />
+    }
+
     return (
         <View style={styles.contenedorComida}>
             <Text>{props.nombre}</Text>
-            <Image style={styles.imagen} source={{uri: props.imagen}} />
+            {Imagen}
         </View>
     );
 }
