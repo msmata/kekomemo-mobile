@@ -3,18 +3,37 @@ import { View, TextInput, Text, Modal, Button, StyleSheet} from 'react-native'
 
 const ModalAgregarComida = props => {
 
-    const [comidaNueva, setComidaNueva] = useState('');
+    const [comidaNueva, setComidaNueva] = useState({
+        descripcion: '',
+        urlImagen: ''
+    });
 
     return (
         <Modal visible={props.visible}>
             <View style={styles.contenedorComidaNueva}>
                 <Text style={styles.texto}>Agregá una nueva comida</Text>
-                <TextInput style={styles.txtComidaNueva} value={comidaNueva} onChangeText={texto => setComidaNueva(texto)} />
+                <TextInput style={styles.txtComidaNueva} value={comidaNueva.descripcion} onChangeText={texto => setComidaNueva(
+                    {...comidaNueva, descripcion: texto}
+                )} />
+                <Text style={styles.texto}>Podés agregar la url de una imagen que represente a esta comida</Text>
+                <TextInput style={styles.txtComidaNueva} value={comidaNueva.urlImagen} onChangeText={texto => setComidaNueva(
+                    {...comidaNueva, urlImagen: texto}
+                )} />
                 <View style={styles.botonera}>
-                    <Button title="Cancelar" onPress={props.onCancelar} />
+                    <Button title="Cancelar" onPress={() => {
+                        setComidaNueva({
+                            descripcion: '',
+                            urlImagen: ''
+                        });
+                        props.onCancelar();
+                    }
+                    } />
                     <Button title="Agregar" onPress={() => {
                         props.onAceptar(comidaNueva);
-                        setComidaNueva('');
+                        setComidaNueva({
+                            descripcion: '',
+                            urlImagen: ''
+                        });
                     }} />
                 </View>
             </View>

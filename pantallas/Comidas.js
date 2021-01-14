@@ -20,8 +20,8 @@ const Comidas = props => {
         const listaComidasNueva = listadoComidas;
         listaComidasNueva.push({
             id: listaComidasNueva.length + 1,
-            nombre: valor,
-            imagen: 'sin-imagen'
+            nombre: valor.descripcion,
+            imagen: valor.urlImagen
         });
         setListadoComidas(listaComidasNueva);
         setAgregarNuevaComida(false);

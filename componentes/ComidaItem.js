@@ -5,7 +5,7 @@ const ComidaItem = props => {
 
     let Imagen;
 
-    if (props.imagen === 'sin-imagen') {
+    if (props.imagen === '') {
         Imagen = <Image style={styles.imagen} source={require('../assets/comidas.jpeg')} />
     } else {
         Imagen = <Image style={styles.imagen} source={{uri: props.imagen}} />
