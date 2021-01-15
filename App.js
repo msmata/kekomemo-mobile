@@ -1,12 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Comidas from './pantallas/Comidas';
+import { StyleSheet } from 'react-native';
+import KekomemoNavigator from './navegacion/kekomemo_navigator';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Comidas />      
-    </View>
+      <KekomemoNavigator />
   );
 }
 

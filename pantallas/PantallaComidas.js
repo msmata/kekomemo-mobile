@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import {View, Text, StyleSheet, FlatList, Alert } from 'react-native';
+import {View, StyleSheet, FlatList, Alert } from 'react-native';
 import { AntDesign } from '@expo/vector-icons'
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { COMIDAS } from '../data/dummy';
 import ComidaItem from '../componentes/ComidaItem';
 import ModalAgregarComida from '../componentes/ModalAgregarComida';
+import CustomHeaderButton from '../componentes/CustomHeaderButton';
 
-const Comidas = props => {
+const PantallaComidas = props => {
 
     const [agregarNuevaComida, setAgregarNuevaComida] = useState(false);
     const [listadoComidas, setListadoComidas] = useState(COMIDAS);
@@ -52,7 +54,6 @@ const Comidas = props => {
 
     return (
         <View style={styles.listaComidas}>
-            <Text style={styles.titulo}>Lista de comidas</Text>
             <FlatList 
                 data={listadoComidas}
                 renderItem={renderComida}
@@ -72,14 +73,26 @@ const Comidas = props => {
     );
 };
 
+PantallaComidas.navigationOptions = navData => {
+    return {
+        headerTitle: 'Todas las comidas',
+        headerLeft: () => <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+        <Item
+            title='Menu'
+            iconName='md-menu'
+            onPress={() => {
+                navData.navigation.toggleDrawer()
+            }}
+        />
+    </HeaderButtons>
+    }
+}
+
 const styles = StyleSheet.create({
-    titulo: {
-        paddingTop: 30,
-        paddingBottom: 30
-    },
     listaComidas: {
         flex: 1,
-        width: '90%'
+        width: '90%',
+        marginLeft: 10
     },
     btnAgregar: {
         alignItems: 'center',
@@ -91,4 +104,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Comidas;
+export default PantallaComidas;
