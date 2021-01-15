@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {View, StyleSheet, Alert } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import CustomHeaderButton from '../componentes/CustomHeaderButton';
-import { COMIDAS } from '../data/dummy';
 import ListaComidas from '../componentes/ListaComidas';
+import { useSelector } from 'react-redux';
 
 const PantallaSeleccionComidas = props => {
 
-    const [listadoComidas, setListadoComidas] = useState(COMIDAS);
+    const listadoComidas = useSelector(estado => estado.comidas.comidas);
 
     const consumirComida = id => {
         console.log('Consumida comida con id ', id);
