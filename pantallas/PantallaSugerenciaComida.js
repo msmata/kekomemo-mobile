@@ -3,13 +3,12 @@ import { View, Text, Image, StyleSheet, Alert } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import CustomHeaderButton from '../componentes/CustomHeaderButton';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import { COMIDAS } from '../data/dummy';
-import ComidaItem from '../componentes/ComidaItem';
 import ListaComidas from '../componentes/ListaComidas';
+import { useSelector } from 'react-redux';
 
 const PantallaSugerenciaComida = props => {
 
-    const [listadoComidas, setListadoComidas] = useState(COMIDAS);
+    const [listadoComidas, setListadoComidas] = useState(useSelector(estado => estado.comidas.comidas));
     const [comidasSugeridas, setComidasSugeridas] = useState([]);
     const [chef, setChef] = useState(<Image style={styles.chef} source={require('../assets/chef-danette.jpeg')} />);
     const [comidaSugeridaActual, setComidaSugeridaActual] = useState(null);
