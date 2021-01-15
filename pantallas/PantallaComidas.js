@@ -2,15 +2,18 @@ import React, { useState } from 'react';
 import {View, StyleSheet, Alert } from 'react-native';
 import { AntDesign } from '@expo/vector-icons'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
-import { COMIDAS } from '../data/dummy';
+import { useSelector, useDispatch } from 'react-redux';
 import ModalAgregarComida from '../componentes/ModalAgregarComida';
 import CustomHeaderButton from '../componentes/CustomHeaderButton';
 import ListaComidas from '../componentes/ListaComidas';
+import { borrarComida, agregarComida } from '../store/actions/comidas' 
 
 const PantallaComidas = props => {
 
+    const dispatch = useDispatch();
+
     const [agregarNuevaComida, setAgregarNuevaComida] = useState(false);
-    const [listadoComidas, setListadoComidas] = useState(COMIDAS);
+    const listadoComidas = useSelector(estado => estado.comidas.comidas);
 
     const mostrarAlertaBorrado = id => {
         const comidaSeleccionada = listadoComidas.find(comida => comida.id === id);
@@ -24,25 +27,14 @@ const PantallaComidas = props => {
                 onPress: () => {},
                 style: "cancel"
               },
-              { text: "OK", onPress: () => borrarComida(id) }
+              { text: "OK", onPress: () => dispatch(borrarComida(id)) }
             ],
             { cancelable: false }
         );
     }
 
-    const borrarComida = id => {
-        const listaComidasNueva = listadoComidas.filter(comida => comida.id !== id);
-        setListadoComidas(listaComidasNueva);
-    }
-
     const addComida = (valor) => {
-        const listaComidasNueva = listadoComidas;
-        listaComidasNueva.push({
-            id: listaComidasNueva.length + 1,
-            nombre: valor.descripcion,
-            imagen: valor.urlImagen
-        });
-        setListadoComidas(listaComidasNueva);
+        dispatch(agregarComida(valor.descripcion, valor.urlImagen));
         setAgregarNuevaComida(false);
     }
 
