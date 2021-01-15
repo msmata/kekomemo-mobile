@@ -12,11 +12,17 @@ const ComidaItem = props => {
         Imagen = <Image style={styles.imagen} source={{uri: props.imagen}} />
     }
 
+    let BotonBorrado;
+
+    if (props.permiteBorrado) {
+        BotonBorrado = <Entypo name="trash" size={32} color="red" onPress={props.borrarComida} />;
+    }
+
     return (
         <View style={styles.contenedorComida}>
             <View style={styles.cabecera}>
                 <Text style={styles.nombre}>{props.nombre}</Text>
-                <Entypo name="trash" size={32} color="red" onPress={props.borrarComida} />
+                {BotonBorrado}
             </View>
             {Imagen}
         </View>

@@ -3,20 +3,14 @@ import {View, StyleSheet, FlatList, Alert } from 'react-native';
 import { AntDesign } from '@expo/vector-icons'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { COMIDAS } from '../data/dummy';
-import ComidaItem from '../componentes/ComidaItem';
 import ModalAgregarComida from '../componentes/ModalAgregarComida';
 import CustomHeaderButton from '../componentes/CustomHeaderButton';
+import ListaComidas from '../componentes/ListaComidas';
 
 const PantallaComidas = props => {
 
     const [agregarNuevaComida, setAgregarNuevaComida] = useState(false);
     const [listadoComidas, setListadoComidas] = useState(COMIDAS);
-
-    const renderComida = itemData => {
-        return (
-            <ComidaItem nombre={itemData.item.nombre} imagen={itemData.item.imagen} borrarComida={() => mostrarAlertaBorrado(itemData.item.id)} />
-        );
-    }
 
     const mostrarAlertaBorrado = id => {
         const comidaSeleccionada = listadoComidas.find(comida => comida.id === id);
@@ -54,10 +48,10 @@ const PantallaComidas = props => {
 
     return (
         <View style={styles.listaComidas}>
-            <FlatList 
-                data={listadoComidas}
-                renderItem={renderComida}
-                keyExtractor={(item, index) => index.toString()}
+            <ListaComidas
+                listadoComidas={listadoComidas}
+                mostrarAlertaBorrado={mostrarAlertaBorrado}
+                permiteBorrado={true}
             />
             <View style={styles.btnAgregar}>
                 <AntDesign name="pluscircleo" size={32} color="black" onPress={() => {
