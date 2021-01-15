@@ -5,6 +5,7 @@ import { createDrawerNavigator } from 'react-navigation-drawer';
 import { FontAwesome, AntDesign } from '@expo/vector-icons'; 
 import PantallaComidas from '../pantallas/PantallaComidas';
 import PantallaSeleccionComidas from '../pantallas/PantallaSeleccionComidas';
+import PantallaSugerenciaComida from '../pantallas/PantallaSugerenciaComida';
 
 const defNavOpt = {
     headerStyle: {
@@ -32,15 +33,24 @@ const SeleccionComidasNavigator = createStackNavigator({
    } 
 });
 
+const SugerenciaComidasNavigator = createStackNavigator({
+    SugerenciaComidas: PantallaSugerenciaComida
+}, {
+   defaultNavigationOptions: defNavOpt,
+   navigationOptions: {
+        drawerIcon: drawerConfig => <FontAwesome name="spoon" size={24} color="black" />
+   }
+});
+
 const KekomemoNavigator = createDrawerNavigator({
     Listado: ListadoComidasNavigator,
-    Seleccion: SeleccionComidasNavigator
+    Seleccion: SeleccionComidasNavigator,
+    Sugerencia: SugerenciaComidasNavigator
 }, {
     contentOptions: {
         activeTintColor: 'black'
     },
     initialRouteName: 'Listado'
-
 });
 
 export default createAppContainer(KekomemoNavigator);

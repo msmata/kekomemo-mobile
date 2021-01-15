@@ -43,7 +43,8 @@ const styles = StyleSheet.create({
         height: 350
     },
     nombre:{
-        marginLeft: 10
+        marginLeft: 10,
+        fontSize: 16
     },
     contenedorComida: {
         flex: 1,
