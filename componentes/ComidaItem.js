@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet, Image, Button} from 'react-native';
 import { Entypo } from '@expo/vector-icons';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 const ComidaItem = props => {
 
@@ -10,6 +11,12 @@ const ComidaItem = props => {
         Imagen = <Image style={styles.imagen} source={require('../assets/comidas.jpeg')} />
     } else {
         Imagen = <Image style={styles.imagen} source={{uri: props.imagen}} />
+    }
+
+    if (props.onSeleccion) {
+        Imagen = <TouchableWithoutFeedback onPress={() => props.onSeleccion(props.idComida)}>
+            {Imagen}
+        </TouchableWithoutFeedback>;
     }
 
     let BotonBorrado;

@@ -7,9 +7,11 @@ const ListaComidas = props => {
     const renderComida = itemData => {
         return (
             <ComidaItem 
-                nombre={itemData.item.nombre} 
+                nombre={itemData.item.nombre}
+                idComida={itemData.item.id}
                 imagen={itemData.item.imagen}
                 permiteBorrado={props.permiteBorrado}
+                onSeleccion={props.onSeleccion}
                 borrarComida={() => props.mostrarAlertaBorrado(itemData.item.id)} 
             />
         );

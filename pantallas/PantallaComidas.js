@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {View, StyleSheet, FlatList, Alert } from 'react-native';
+import {View, StyleSheet, Alert } from 'react-native';
 import { AntDesign } from '@expo/vector-icons'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { COMIDAS } from '../data/dummy';

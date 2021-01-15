@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {View, StyleSheet } from 'react-native';
+import {View, StyleSheet, Alert } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import CustomHeaderButton from '../componentes/CustomHeaderButton';
 import { COMIDAS } from '../data/dummy';
@@ -9,11 +9,34 @@ const PantallaSeleccionComidas = props => {
 
     const [listadoComidas, setListadoComidas] = useState(COMIDAS);
 
+    const consumirComida = id => {
+        console.log('Consumida comida con id ', id);
+    }
+
+    const seleccionarComida = id => {
+        const comidaSeleccionada = listadoComidas.find(comida => comida.id === id);
+
+        Alert.alert(
+            "Confirmación",
+            "¿Confirmás que vas a comer " + comidaSeleccionada.nombre + "?",
+            [
+              {
+                text: "Cancelar",
+                onPress: () => {},
+                style: "cancel"
+              },
+              { text: "OK", onPress: () => consumirComida(id) }
+            ],
+            { cancelable: false }
+        );
+    }
+
     return (
         <View style={styles.listaComidas}>
             <ListaComidas
                 listadoComidas={listadoComidas}
                 permiteBorrado={false}
+                onSeleccion={seleccionarComida}
             />
         </View>
     );
@@ -29,7 +52,7 @@ const styles = StyleSheet.create({
 
 PantallaSeleccionComidas.navigationOptions = navData => {
     return {
-        headerTitle: 'Todas las comidas',
+        headerTitle: 'Selección manual de comida',
         headerLeft: () => <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
         <Item
             title='Menu'
