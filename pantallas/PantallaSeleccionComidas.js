@@ -1,15 +1,31 @@
-import React from 'react';
-import {View, Text} from 'react-native';
+import React, { useState } from 'react';
+import {View, StyleSheet } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import CustomHeaderButton from '../componentes/CustomHeaderButton';
+import { COMIDAS } from '../data/dummy';
+import ListaComidas from '../componentes/ListaComidas';
 
 const PantallaSeleccionComidas = props => {
+
+    const [listadoComidas, setListadoComidas] = useState(COMIDAS);
+
     return (
-        <View>
-            <Text>Pantalla de seleccion de comidas</Text>
+        <View style={styles.listaComidas}>
+            <ListaComidas
+                listadoComidas={listadoComidas}
+                permiteBorrado={false}
+            />
         </View>
     );
 };
+
+const styles = StyleSheet.create({
+    listaComidas: {
+        flex: 1,
+        width: '90%',
+        marginLeft: 10
+    }
+});
 
 PantallaSeleccionComidas.navigationOptions = navData => {
     return {
