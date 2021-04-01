@@ -1,9 +1,9 @@
 import React from 'react';
-import {View, StyleSheet, Alert } from 'react-native';
+import { Alert } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import CustomHeaderButton from '../componentes/CustomHeaderButton';
-import ListaComidas from '../componentes/ListaComidas';
 import { useSelector } from 'react-redux';
+import VistaSeleccionComidas from '../vistas/VistaSeleccionComidas';
 
 const PantallaSeleccionComidas = props => {
 
@@ -32,23 +32,12 @@ const PantallaSeleccionComidas = props => {
     }
 
     return (
-        <View style={styles.listaComidas}>
-            <ListaComidas
-                listadoComidas={listadoComidas}
-                permiteBorrado={false}
-                onSeleccion={seleccionarComida}
-            />
-        </View>
+        <VistaSeleccionComidas
+            listadoComidas={listadoComidas}
+            seleccionarComida={seleccionarComida}
+        />
     );
 };
-
-const styles = StyleSheet.create({
-    listaComidas: {
-        flex: 1,
-        width: '90%',
-        marginLeft: 10
-    }
-});
 
 PantallaSeleccionComidas.navigationOptions = navData => {
     return {

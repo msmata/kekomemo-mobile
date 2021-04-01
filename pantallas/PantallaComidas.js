@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
-import {View, StyleSheet, Alert } from 'react-native';
-import { AntDesign } from '@expo/vector-icons'
+import { Alert } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { useSelector, useDispatch } from 'react-redux';
-import ModalAgregarComida from '../componentes/ModalAgregarComida';
 import CustomHeaderButton from '../componentes/CustomHeaderButton';
-import ListaComidas from '../componentes/ListaComidas';
 import { borrarComida, agregarComida } from '../store/actions/comidas' 
+import VistaComidas from '../vistas/VistaComidas';
 
-const PantallaComidas = props => {
+const PantallaComidas = () => {
 
     const dispatch = useDispatch();
 
@@ -39,23 +37,13 @@ const PantallaComidas = props => {
     }
 
     return (
-        <View style={styles.listaComidas}>
-            <ListaComidas
-                listadoComidas={listadoComidas}
-                mostrarAlertaBorrado={mostrarAlertaBorrado}
-                permiteBorrado={true}
-            />
-            <View style={styles.btnAgregar}>
-                <AntDesign name="pluscircleo" size={32} color="black" onPress={() => {
-                    setAgregarNuevaComida(true);
-                }} />
-            </View>
-            <ModalAgregarComida 
-                visible={agregarNuevaComida}
-                onCancelar={() => setAgregarNuevaComida(false)}
-                onAceptar={addComida}
-            />
-        </View>
+        <VistaComidas
+            listadoComidas={listadoComidas}
+            mostrarAlertaBorrado={mostrarAlertaBorrado}
+            agregarNuevaComida={agregarNuevaComida}
+            setAgregarNuevaComida={setAgregarNuevaComida}
+            addComida={addComida}
+        />
     );
 };
 
@@ -73,21 +61,5 @@ PantallaComidas.navigationOptions = navData => {
     </HeaderButtons>
     }
 }
-
-const styles = StyleSheet.create({
-    listaComidas: {
-        flex: 1,
-        width: '90%',
-        marginLeft: 10
-    },
-    btnAgregar: {
-        alignItems: 'center',
-        padding: 20
-    },
-    nuevaComida: {
-        flexDirection: 'row',
-        flex: 1
-    }
-});
 
 export default PantallaComidas;
