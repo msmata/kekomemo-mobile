@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, Image, StyleSheet, Alert } from 'react-native';
+import { Image, StyleSheet, Alert } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import CustomHeaderButton from '../componentes/CustomHeaderButton';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import ListaComidas from '../componentes/ListaComidas';
 import { useSelector } from 'react-redux';
+import VistaSugerenciaComida from '../vistas/VistaSugerenciaComida';
 
-const PantallaSugerenciaComida = props => {
+const PantallaSugerenciaComida = () => {
 
     const [listadoComidas, setListadoComidas] = useState(useSelector(estado => estado.comidas.comidas));
     const [comidasSugeridas, setComidasSugeridas] = useState([]);
@@ -67,13 +67,11 @@ const PantallaSugerenciaComida = props => {
     }
 
     return (
-        <View style={styles.sugerenciaContainer}>
-            <Text>Presioná la cara del chef para recibir una sugerencia</Text>
-            <TouchableWithoutFeedback onPress={sugerirComida}>
-                {chef}
-            </TouchableWithoutFeedback>
-            {comidaSugerida}
-        </View>
+        <VistaSugerenciaComida
+            sugerirComida={sugerirComida}
+            comidaSugerida={comidaSugerida}
+            chef={chef}
+        />
     );
 };
 
@@ -100,10 +98,6 @@ const styles = StyleSheet.create({
     chefEnojado: {
         height: 600,
         width: '100%'
-    },
-    sugerenciaContainer: {
-        width: '100%',
-        paddingHorizontal: 10
     }
 });
 
