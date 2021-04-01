@@ -1,7 +1,5 @@
 import React from 'react';
 import {View, StyleSheet } from 'react-native';
-import { HeaderButtons, Item } from 'react-navigation-header-buttons';
-import CustomHeaderButton from '../componentes/CustomHeaderButton';
 import ListaComidas from '../componentes/ListaComidas';
 
 const VistaSeleccionComidas = ({listadoComidas, seleccionarComida}) => {
@@ -24,20 +22,5 @@ const styles = StyleSheet.create({
         marginLeft: 10
     }
 });
-
-PantallaSeleccionComidas.navigationOptions = navData => {
-    return {
-        headerTitle: 'Selección manual de comida',
-        headerLeft: () => <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-        <Item
-            title='Menu'
-            iconName='md-menu'
-            onPress={() => {
-                navData.navigation.toggleDrawer()
-            }}
-        />
-    </HeaderButtons>
-    }
-}
 
 export default VistaSeleccionComidas;
