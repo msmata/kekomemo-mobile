@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Alert } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { useSelector, useDispatch } from 'react-redux';
 import CustomHeaderButton from '../componentes/CustomHeaderButton';
-import { borrarComida, agregarComida } from '../store/actions/comidas' 
+import { borrarComida, agregarComida, listarComidas } from '../store/actions/comidas' 
 import VistaComidas from '../vistas/VistaComidas';
 
 const PantallaComidas = () => {
@@ -12,6 +12,11 @@ const PantallaComidas = () => {
 
     const [agregarNuevaComida, setAgregarNuevaComida] = useState(false);
     const listadoComidas = useSelector(estado => estado.comidas.comidas);
+
+    useEffect(() => {
+        console.log("useEffect pantalla comidas");
+        dispatch(listarComidas());
+    }, []);
 
     const mostrarAlertaBorrado = id => {
         const comidaSeleccionada = listadoComidas.find(comida => comida.id === id);
