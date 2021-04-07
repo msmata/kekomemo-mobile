@@ -33,7 +33,17 @@ const extraerListaComidas = response => {
 }
 
 export const borrarComida = id => {
-    return {type: BORRAR_COMIDA, idComida: id};
+    return async dispatch => {
+        fetch(`https://kekomemo-f4a2a-default-rtdb.firebaseio.com/comidas/${id}.json`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(async response => {
+            console.log("comida borrada con id ", id);
+            dispatch({type: BORRAR_COMIDA, idComida: id});
+        }).catch(error => console.log(error));
+    }
 }
 
 export const agregarComida = (descripcion, urlImagen) => {
