@@ -1,10 +1,8 @@
-import { BORRAR_COMIDA, AGREGAR_COMIDA } from "../actions/comidas";
+import { BORRAR_COMIDA, AGREGAR_COMIDA, LISTAR_COMIDAS } from "../actions/comidas";
 import Comida from "../../modelo/Comida";
 
-const { COMIDAS } = require("../../data/dummy");
-
 const estadoInicial = {
-    comidas: COMIDAS
+    comidas: []
 };
 
 export default (estado = estadoInicial, action) => {
@@ -12,6 +10,10 @@ export default (estado = estadoInicial, action) => {
     const listadoComidas = estado.comidas;
 
     switch (action.type) {
+        case LISTAR_COMIDAS:
+            return {
+                comidas: action.comidas
+            }
         case BORRAR_COMIDA:
 
             return {
